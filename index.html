@@ -73,6 +73,81 @@
       </section>
     </div>
   </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DN Company ERP</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;background:#080808;color:#fff;font-family:Arial,Helvetica,sans-serif} .wrap{max-width:1100px;margin:auto;padding:18px}.card{background:#151515;border:1px solid #5b4510;border-radius:24px;padding:18px;margin:14px 0;box-shadow:0 10px 40px rgba(0,0,0,.35)}.brand{display:flex;gap:14px;align-items:center}.logo{width:70px;height:70px;border-radius:20px;background:linear-gradient(135deg,#ffd84d,#a56f00);display:grid;place-items:center;color:#000;font-weight:900;font-size:28px}.muted{color:#aaa}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}input,select,textarea,button{width:100%;padding:14px;border-radius:14px;border:1px solid #6b5419;background:#0d0d0d;color:#fff;font-size:16px}button{background:linear-gradient(135deg,#ffd84d,#b8860b);color:#111;font-weight:900;border:none;cursor:pointer}.ghost{background:#202020;color:#fff;border:1px solid #444}.danger{background:#4b1111;color:#ffd1d1}.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.nav button.active{outline:2px solid #ffd84d}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#101010;border:1px solid #3a3218;border-radius:18px;padding:14px}.items{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.item{background:#101010;border:1px solid #3a3218;border-radius:18px;padding:14px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.chip{background:#2b2108;color:#ffe58a;border:1px solid #6b5419;border-radius:999px;padding:6px 10px;font-size:13px}.red{background:#4b1111;color:#ffd1d1;border-color:#8b2222}.hide{display:none}@media(max-width:800px){.grid,.items,.stats,.nav{grid-template-columns:1fr}.wrap{padding:12px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card brand">
+      <div class="logo">DN</div>
+      <div>
+        <h1>DN Company ERP</h1>
+        <p class="muted">Technology Sales • Repair • Inventory Management</p>
+      </div>
+    </div>
+
+    <div id="loginBox" class="card">
+      <h2>Admin Login</h2>
+      <input id="email" value="admin@dncompany.kr" placeholder="Email" />
+      <input id="password" type="password" value="DN@2026Admin" placeholder="Password" />
+      <button onclick="login()">Sign In</button>
+      <button class="ghost" onclick="createAdmin()">Create Default Admin First</button>
+      <p class="muted">Default: admin@dncompany.kr / DN@2026Admin</p>
+    </div>
+
+    <div id="appBox" class="hide">
+      <div class="card nav">
+        <button id="dashBtn" class="active" onclick="showTab('dashboard')">Dashboard</button>
+        <button id="invBtn" onclick="showTab('inventory')">Inventory</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+
+      <section id="dashboard" class="card">
+        <h2>Dashboard</h2>
+        <div class="stats">
+          <div class="stat"><p class="muted">Items</p><h3 id="statItems">0</h3></div>
+          <div class="stat"><p class="muted">Stock Qty</p><h3 id="statQty">0</h3></div>
+          <div class="stat"><p class="muted">Stock Value KRW</p><h3 id="statValue">₩ 0</h3></div>
+          <div class="stat"><p class="muted">Low Stock</p><h3 id="statLow">0</h3></div>
+        </div>
+      </section>
+
+      <section id="inventory" class="card hide">
+        <h2>Inventory Module</h2>
+        <div class="grid">
+          <select id="category"><option>Laptop</option><option>Desktop</option><option>Mobile</option><option>Tablet</option><option>Accessories</option><option>Spare Parts</option><option>Used Device</option><option>Pre-order</option></select>
+          <select id="condition"><option>Brand New</option><option>Recondition</option><option>Used</option><option>Open Box</option></select>
+          <input id="brand" placeholder="Brand (Dell / Apple / Samsung)" />
+          <input id="model" placeholder="Model (Alienware M15)" />
+          <input id="cpu" placeholder="CPU" />
+          <input id="ram" placeholder="RAM" />
+          <input id="ssd" placeholder="SSD / Storage" />
+          <input id="gpu" placeholder="GPU" />
+          <input id="display" placeholder="Display" />
+          <input id="serial" placeholder="IMEI / Serial Number" />
+          <input id="supplier" placeholder="Supplier" />
+          <input id="qty" type="number" placeholder="Qty" value="1" />
+          <input id="buyKRW" type="number" placeholder="Buy Price KRW" />
+          <input id="sellLKR" type="number" placeholder="Sell Price LKR" />
+          <input id="min" type="number" placeholder="Low Stock Alert Qty" value="1" />
+          <input id="warranty" placeholder="Warranty" value="1 Month Hardware / 3 Months Software" />
+        </div>
+        <textarea id="notes" placeholder="Notes"></textarea>
+        <button id="saveBtn" onclick="saveItem()">Save Inventory Item</button>
+        <button class="ghost hide" id="cancelBtn" onclick="cancelEdit()">Cancel Edit</button>
+        <br><br>
+        <input id="search" placeholder="Search inventory..." oninput="renderItems()" />
+        <div id="items" class="items"></div>
+      </section>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js';
