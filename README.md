@@ -1,1 +1,1 @@
-DN Company ERP - Single File Inventory Version
+DN Company ERP - Inventory + Sales POS Single File Version
